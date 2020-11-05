@@ -14,7 +14,7 @@ git init
 git status
 git add README.md
 git commit -m "first commit"
-git remote add origin https://gitee.com/liuxingqi/git-demo.git
+git remote add origin https://gitee.com/liuxingqi/notes.git
 git push -u origin master
 ```
 
@@ -22,7 +22,7 @@ git push -u origin master
 
 ```
 cd existing_git_repo
-git remote add origin https://gitee.com/liuxingqi/git-demo.git
+git remote add origin https://gitee.com/liuxingqi/notes.git
 git push -u origin master
 ```
 
