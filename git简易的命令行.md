@@ -8,8 +8,6 @@ git config --global user.email "850100920@qq.com"
 创建 git 仓库:
 
 ```
-mkdir javascript
-cd javascript
 git init
 git status
 git add README.md
@@ -25,6 +23,3 @@ cd existing_git_repo
 git remote add origin https://gitee.com/liuxingqi/notes.git
 git push -u origin master
 ```
-
- 
-
