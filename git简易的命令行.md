@@ -23,3 +23,10 @@ cd existing_git_repo
 git remote add origin https://gitee.com/liuxingqi/notes.git
 git push -u origin master
 ```
+
+报错
+
+```
+git pull --rebase origin master
+```
+
