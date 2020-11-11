@@ -14,9 +14,9 @@
 > 能够修改表单元素的属性
 > 能够修改元素的样式属性
 
-## 1.1. Web API介绍
+## 1. Web API介绍
 
-### 1.1.1 API的概念
+### 1.1 API的概念
 
 API（Application Programming Interface，应用程序编程接口）是一些预先定义的函数，目的是提供应用程序与开发人员基于某软件或硬件得以访问一组例程的能力，而又无需访问源码，无需理解其内部工作机制细节，只需直接调用使用即可。
 
@@ -30,7 +30,7 @@ API（Application Programming Interface，应用程序编程接口）是一些�
 >
 > 这些工具（函数）由编程语言提供，内部的实现已经封装好了，我们只要学会灵活的使用这些工具即可。
 
-### 1.1.2 Web  API的概念
+### 1.2 Web  API的概念
 
 ​	Web API 是浏览器提供的一套操作浏览器功能和页面元素的 API ( BOM 和 DOM )。
 
@@ -42,7 +42,7 @@ API（Application Programming Interface，应用程序编程接口）是一些�
 
 ​	此处的 Web API 特指浏览器提供的一系列API(很多函数或对象方法)，即操作网页的一系列工具。例如：操作html标签、操作页面地址的方法。
 
-### 1.1.3 API 和 Web  API 总结
+### 1.3 API 和 Web  API 总结
 
 1. API 是为我们程序员提供的一个接口，帮助我们实现某种功能，我们会使用就可以了，不必纠结内部如何实现
 
@@ -52,9 +52,9 @@ API（Application Programming Interface，应用程序编程接口）是一些�
 
 4. 学习 Web API 可以结合前面学习内置对象方法的思路学习
 
-## 1.2. DOM 介绍
+## 2. DOM 介绍
 
-### 1.2.1 什么是DOM
+### 2.1 什么是DOM
 
 ​	文档对象模型（Document Object Model，简称DOM），是 [W3C](https://baike.baidu.com/item/W3C) 组织推荐的处理[可扩展标记语言](https://baike.baidu.com/item/%E5%8F%AF%E6%89%A9%E5%B1%95%E7%BD%AE%E6%A0%87%E8%AF%AD%E8%A8%80)（html或者xhtml）的标准[编程接口](https://baike.baidu.com/item/%E7%BC%96%E7%A8%8B%E6%8E%A5%E5%8F%A3)。
 
@@ -62,7 +62,7 @@ API（Application Programming Interface，应用程序编程接口）是一些�
 
 > DOM是W3C组织制定的一套处理 html和xml文档的规范，所有的浏览器都遵循了这套标准。
 
-### 1.2.2. DOM树
+### 2.2. DOM树
 
 ![1550731974575](images/1550731974575.png)
 
@@ -74,13 +74,13 @@ DOM树 又称为文档树模型，把文档映射成树形结构，通过节点�
 
 ![1550732362134](images/1550732362134.png)
 
-## 1.3. 获取元素
+## 3. 获取元素
 
 为什么要获取页面元素？
 
 例如：我们想要操作页面上的某部分(显示/隐藏，动画)，需要先获取到该部分对应的元素，再对其进行操作。
 
-### 1.3.1. 根据ID获取
+### 3.1. 根据ID获取
 
 ```js
 语法：document.getElementById(id)
@@ -108,7 +108,7 @@ DOM树 又称为文档树模型，把文档映射成树形结构，通过节点�
 </body>
 ```
 
-### 1.3.2. 根据标签名获取元素
+### 3.2. 根据标签名获取元素
 
 ```
 语法：document.getElementsByTagName('标签名') 或者 element.getElementsByTagName('标签名') 
@@ -119,44 +119,47 @@ DOM树 又称为文档树模型，把文档映射成树形结构，通过节点�
 
 **案例代码**
 
-```javascript
-<body>
-    <ul>
-        <li>知否知否，应是等你好久11</li>
-        <li>知否知否，应是等你好久22</li>
-        <li>知否知否，应是等你好久33</li>
-        <li>知否知否，应是等你好久44</li>
-        <li>知否知否，应是等你好久55</li>
-    </ul>
-    <ul id="nav">
-        <li>生僻字</li>
-        <li>生僻字</li>
-        <li>生僻字</li>
-        <li>生僻字</li>
-        <li>生僻字</li>
-    </ul>
-    <script>
-        // 1.返回的是 获取过来元素对象的集合 以伪数组的形式存储的
-        var lis = document.getElementsByTagName('li');
-        console.log(lis);
-        console.log(lis[0]);
-        // 2. 我们想要依次打印里面的元素对象我们可以采取遍历的方式
-        for (var i = 0; i < lis.length; i++) {
-            console.log(lis[i]);
-        }
-        // 3. element.getElementsByTagName()  可以得到这个元素里面的某些标签
-        var nav = document.getElementById('nav'); // 这个获得nav 元素
-        var navLis = nav.getElementsByTagName('li');
-        console.log(navLis);
-    </script>
-</body>
+```html
+<ul>
+    <li>知否知否，应是等你好久11</li>
+    <li>知否知否，应是等你好久11</li>
+    <li>知否知否，应是等你好久11</li>
+    <li>知否知否，应是等你好久11</li>
+
+</ul>
+<ol id="ol">
+    <li>生僻字</li>
+    <li>生僻字</li>
+    <li>生僻字</li>
+    <li>生僻字</li>
+
+</ol>
+
+<script>
+    // 1.返回的是 获取过来元素对象的集合 以伪数组的形式存储的
+    var lis = document.getElementsByTagName('li');
+    console.log(lis);
+    console.log(lis[0]);
+    // 2. 我们想要依次打印里面的元素对象我们可以采取遍历的方式
+    for (var i = 0; i < lis.length; i++) {
+        console.log(lis[i]);
+
+    }
+    // 3. 如果页面中只有一个li 返回的还是伪数组的形式 
+    // 4. 如果页面中没有这个元素 返回的是空的伪数组的形式
+    // 5. element.getElementsByTagName('标签名'); 父元素必须是指定的单个元素
+    // var ol = document.getElementsByTagName('ol'); // [ol]
+    // console.log(ol[0].getElementsByTagName('li'));
+    var ol = document.getElementById('ol');
+    console.log(ol.getElementsByTagName('li'));
+</script>
 ```
 
 ![1550733441663](images/1550733441663.png)
 
 注意：getElementsByTagName()获取到是动态集合，即：当页面增加了标签，这个集合中也就增加了元素。
 
-### 1.3.3. H5新增获取元素方式
+### 3.3. H5新增获取元素方式
 
 ![1550733518278](images/1550733518278.png)
 
@@ -164,51 +167,64 @@ DOM树 又称为文档树模型，把文档映射成树形结构，通过节点�
 
 **案例代码**
 
-```js
-<body>
-    <div class="box">盒子1</div>
-    <div class="box">盒子2</div>
-    <div id="nav">
-        <ul>
-            <li>首页</li>
-            <li>产品</li>
-        </ul>
-    </div>
-    <script>
-        // 1. getElementsByClassName 根据类名获得某些元素集合
-        var boxs = document.getElementsByClassName('box');
-        console.log(boxs);
-        // 2. querySelector 返回指定选择器的第一个元素对象  切记 里面的选择器需要加符号 .box  #nav
-        var firstBox = document.querySelector('.box');
-        console.log(firstBox);
-        var nav = document.querySelector('#nav');
-        console.log(nav);
-        var li = document.querySelector('li');
-        console.log(li);
-        // 3. querySelectorAll()返回指定选择器的所有元素对象集合
-        var allBox = document.querySelectorAll('.box');
-        console.log(allBox);
-        var lis = document.querySelectorAll('li');
-        console.log(lis);
-    </script>
-</body>
+```html
+<div class="box">盒子1</div>
+<div class="box">盒子2</div>
+<div id="nav">
+    <ul>
+        <li>首页</li>
+        <li>产品</li>
+    </ul>
+</div>
+<script>
+    // 1. getElementsByClassName 根据类名获得某些元素集合
+    var boxs = document.getElementsByClassName('box');
+    console.log(boxs);
+    // 2. querySelector 返回指定选择器的第一个元素对象  切记 里面的选择器需要加符号 .box  #nav
+    var firstBox = document.querySelector('.box');
+    console.log(firstBox);
+    var nav = document.querySelector('#nav');
+    console.log(nav);
+    var li = document.querySelector('li');
+    console.log(li);
+    // 3. querySelectorAll()返回指定选择器的所有元素对象集合
+    var allBox = document.querySelectorAll('.box');
+    console.log(allBox);
+    var lis = document.querySelectorAll('li');
+    console.log(lis);
+</script>
 ```
 
-### 1.3.4 获取特殊元素（body，html）
+### 3.4 获取特殊元素（body，html）
 
 ![1550733794816](images/1550733794816.png)
 
-## 1.4. 事件基础
+```html
+<script>
+    // 1.获取body 元素
+    var bodyEle = document.body;
+    console.log(bodyEle);
+    console.dir(bodyEle);
+    // 2.获取html 元素
+    // var htmlEle = document.html;
+    var htmlEle = document.documentElement;
+    console.log(htmlEle);
+</script>
+```
 
-### 1.4.1. 事件概述
+
+
+## 4. 事件基础
+
+### 4.1. 事件概述
 
 JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScript 侦测到的行为。
 
 简单理解： **触发--- 响应机制**。
 
-​	网页中的每个元素都可以产生某些可以触发 JavaScript 的事件，例如，我们可以在用户点击某按钮时产生一个 事件，然后去执行某些操作。
+网页中的每个元素都可以产生某些可以触发 JavaScript 的事件，例如，我们可以在用户点击某按钮时产生一个 事件，然后去执行某些操作。
 
-### 1.4.2. 事件三要素
+### 4.2. 事件三要素
 
 - 事件源（谁）：触发事件的元素
 - 事件类型（什么事件）： 例如 click 点击事件
@@ -216,7 +232,7 @@ JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScri
 
 **案例代码**
 
-```js
+```html
 <body>
     <button id="btn">唐伯虎</button>
     <script>
@@ -233,13 +249,13 @@ JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScri
 </body>
 ```
 
-### 1.4.3. 执行事件的步骤
+### 4.3. 执行事件的步骤
 
 ![1550734387056](images/1550734387056.png)
 
 **案例代码**
 
-```js
+```html
 <body>
     <div>123</div>
     <script>
@@ -257,52 +273,54 @@ JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScri
 </body>
 ```
 
-### 1.4.4. 常见的鼠标事件
+### 4.4. 常见的鼠标事件
 ![1550734506084](images/1550734506084.png)
 
-### 1.4.5. 分析事件三要素
+### 4.5. 分析事件三要素
 
 - 下拉菜单三要素
 
 - 关闭广告三要素
 
-## 1.5. 操作元素
+## 5. 操作元素
 
 ​	JavaScript的 DOM 操作可以改变网页内容、结构和样式，我们可以利用 DOM 操作元素来改变元素里面的内容、属性等。（注意：这些操作都是通过元素对象的属性实现的）
 
-### 1.5.1. 改变元素内容（获取或设置）
+### 5.1. 改变元素内容（获取或设置）
 
 ![1550735016756](images/1550735016756.png)
 
 **innerText改变元素内容**
 
-```js
-<body>
-    <button>显示当前系统时间</button>
-    <div>某个时间</div>
-    <p>1123</p>
-    <script>
-        // 当我们点击了按钮，  div里面的文字会发生变化
-        // 1. 获取元素 
-        var btn = document.querySelector('button');
-        var div = document.querySelector('div');
-        // 2.注册事件
-        btn.onclick = function() {
-            // div.innerText = '2019-6-6';
-            div.innerHTML = getDate();
-        }
-        function getDate() {
-            var date = new Date();
-            // 我们写一个 2019年 5月 1日 星期三
-            var year = date.getFullYear();
-            var month = date.getMonth() + 1;
-            var dates = date.getDate();
-            var arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-            var day = date.getDay();
-            return '今天是：' + year + '年' + month + '月' + dates + '日 ' + arr[day];
-        }
-    </script>
-</body>
+```html
+<button>显示当前系统时间</button>
+<div>某个时间</div>
+<p>1123</p>
+<script>
+    // 当我们点击了按钮，  div里面的文字会发生变化
+    // 1. 获取元素 
+    var btn = document.querySelector('button');
+    var div = document.querySelector('div');
+    // 2.注册事件
+    btn.onclick = function () {
+        // div.innerText = '2019-6-6';
+        div.innerHTML = getDate();
+    }
+
+    function getDate() {
+        var date = new Date();
+        // 我们写一个 2019年 5月 1日 星期三
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var dates = date.getDate();
+        var arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+        var day = date.getDay();
+        return '今天是：' + year + '年' + month + '月' + dates + '日 ' + arr[day];
+    }
+    // 我们元素可以不用添加事件
+    var p = document.querySelector('p');
+    p.innerHTML = getDate();
+</script>
 ```
 
 **innerText和innerHTML的区别**
@@ -317,29 +335,27 @@ JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScri
 
 **案例代码**
 
-```js
-<body>
-    <div></div>
-    <p>
-        我是文字
-        <span>123</span>
-    </p>
-    <script>
-        // innerText 和 innerHTML的区别 
-        // 1. innerText 不识别html标签 非标准  去除空格和换行
-        var div = document.querySelector('div');
-        // div.innerText = '<strong>今天是：</strong> 2019';
-        // 2. innerHTML 识别html标签 W3C标准 保留空格和换行的
-        div.innerHTML = '<strong>今天是：</strong> 2019';
-        // 这两个属性是可读写的  可以获取元素里面的内容
-        var p = document.querySelector('p');
-        console.log(p.innerText);
-        console.log(p.innerHTML);
-    </script>
-</body>
+```html
+<div></div>
+<p>
+    我是文字
+    <span>123</span>
+</p>
+<script>
+    // innerText 和 innerHTML的区别 
+    // 1. innerText 不识别html标签 非标准  去除空格和换行
+    var div = document.querySelector('div');
+    // div.innerText = '<strong>今天是：</strong> 2019';
+    // 2. innerHTML 识别html标签 W3C标准 保留空格和换行的
+    div.innerHTML = '<strong>今天是：</strong> 2019';
+    // 这两个属性是可q读写的  可以获取元素里面的内容
+    var p = document.querySelector('p');
+    console.log(p.innerText);
+    console.log(p.innerHTML);
+</script>
 ```
 
-### 1.5.2. 常用元素的属性操作
+### 5.2. 常用元素的属性操作
 
 ![1550735556297](images/1550735556297.png)
 
@@ -353,7 +369,7 @@ JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScri
 
 **案例代码**
 
-```js
+```html
 <body>
     <button id="ldh">刘德华</button>
     <button id="zxy">张学友</button> <br>
@@ -379,13 +395,44 @@ JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScri
 
 
 
-### 1.5.3. 案例：分时问候
+### 5.3. 案例：分时问候
 
 ![1550735858049](images/1550735858049.png)
 
 ![1550735877145](images/1550735877145.png)
 
-### 1.5.4. 表单元素的属性操作
+```html
+<img src="images/s.gif" alt="">
+<div>上午好</div>
+<script>
+    // 根据系统不同时间来判断，所以需要用到日期内置对象
+    // 利用多分支语句来设置不同的图片
+    // 需要一个图片，并且根据时间修改图片，就需要用到操作元素src属性
+    // 需要一个div元素，显示不同问候语，修改元素内容即可
+    // 1.获取元素
+    var img = document.querySelector('img');
+    var div = document.querySelector('div');
+    // 2. 得到当前的小时数
+    var date = new Date();
+    var h = date.getHours();
+    // 3. 判断小时数改变图片和文字信息
+    if (h < 12) {
+        img.src = 'images/s.gif';
+        div.innerHTML = '亲，上午好，好好写代码';
+    } else if (h < 18) {
+        img.src = 'images/x.gif';
+        div.innerHTML = '亲，下午好，好好写代码';
+    } else {
+        img.src = 'images/w.gif';
+        div.innerHTML = '亲，晚上好，好好写代码';
+
+    }
+</script>
+```
+
+
+
+### 5.4. 表单元素的属性操作
 
 ![1550736039005](images/1550736039005.png)
 
@@ -401,34 +448,61 @@ JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScri
 
 **案例代码**
 
-```js
-<body>
-    <button>按钮</button>
-    <input type="text" value="输入内容">
-    <script>
-        // 1. 获取元素
-        var btn = document.querySelector('button');
-        var input = document.querySelector('input');
-        // 2. 注册事件 处理程序
-        btn.onclick = function() {
-            // 表单里面的值 文字内容是通过 value 来修改的
-            input.value = '被点击了';
-            // 如果想要某个表单被禁用 不能再点击 disabled  我们想要这个按钮 button禁用
-            // btn.disabled = true;
-            this.disabled = true;
-            // this 指向的是事件函数的调用者 btn
-        }
-    </script>
-</body>
+```html
+<button>按钮</button>
+<input type="text" value="输入内容">
+<script>
+    // 1. 获取元素
+    var btn = document.querySelector('button');
+    var input = document.querySelector('input');
+    // 2. 注册事件 处理程序
+    btn.onclick = function() {
+        // input.innerHTML = '点击了';  这个是 普通盒子 比如 div 标签里面的内容
+        // 表单里面的值 文字内容是通过 value 来修改的
+        input.value = '被点击了';
+        // 如果想要某个表单被禁用 不能再点击 disabled  我们想要这个按钮 button禁用
+        // btn.disabled = true;
+        this.disabled = true;
+        // this 指向的是事件函数的调用者 btn
+    }
+</script>
 ```
 
-### 1.5.5. 案例：仿京东显示密码
+### 5.5. 案例：仿京东显示密码
 
 ![1550736330331](images/1550736330331.png)
 
 ![1550736346822](images/1550736346822.png)
 
-### 1.5.6. 样式属性操作
+```html
+<div class="box">
+    <label for="">
+        <img src="images/close.png" alt="" id="eye">
+    </label>
+    <input type="password" name="" id="pwd">
+</div>
+<script>
+    // 1. 获取元素
+    var eye = document.getElementById('eye');
+    var pwd = document.getElementById('pwd');
+    // 2. 注册事件 处理程序
+    var flag = 0;
+    eye.onclick = function () {
+        // 点击一次之后， flag 一定要变化
+        if (flag == 0) {
+            pwd.type = 'text';
+            eye.src = 'images/open.png';
+            flag = 1; // 赋值操作
+        } else {
+            pwd.type = 'password';
+            eye.src = 'images/close.png';
+            flag = 0;
+        }
+    }
+</script>
+```
+
+### 5.6. 样式属性操作
 
 我们可以通过 JS 修改元素的大小、颜色、位置等样式。
 
@@ -448,20 +522,18 @@ JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScri
 
 **案例代码**
 
-```js
-<body>
-    <div></div>
-    <script>
-        // 1. 获取元素
-        var div = document.querySelector('div');
-        // 2. 注册事件 处理程序
-        div.onclick = function() {
-            // div.style里面的属性 采取驼峰命名法 
-            this.style.backgroundColor = 'purple';
-            this.style.width = '250px';
-        }
-    </script>
-</body>
+```html
+<div></div>
+<script>
+    // 1. 获取元素
+    var div = document.querySelector('div');
+    // 2. 注册事件 处理程序
+    div.onclick = function() {
+        // div.style里面的属性 采取驼峰命名法 
+        this.style.backgroundColor = 'purple';
+        this.style.width = '250px';
+    }
+</script>
 ```
 
 #### 案例：淘宝点击关闭二维码
@@ -470,17 +542,102 @@ JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScri
 
 ![1550736881832](images/1550736881832.png)
 
+```html
+<div class="box">
+    淘宝二维码
+    <img src="images/tao.png" alt="">
+    <i class="close-btn">×</i>
+</div>
+<script>
+    // 1. 获取元素 
+    var btn = document.querySelector('.close-btn');
+    var box = document.querySelector('.box');
+    // 2.注册事件 程序处理
+    btn.onclick = function() {
+        box.style.display = 'none';
+    }
+</script>
+```
+
+
+
 #### 案例：循环精灵图背景
 
 ![1550736940082](images/1550736940082.png)
 
 ![1550736956754](images/1550736956754.png)
 
+```html
+<div class="box">
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
+<script>
+    // 1. 获取元素 所有的小li 
+    var lis = document.querySelectorAll('li');
+    for (var i = 0; i < lis.length; i++) {
+        // 让索引号 乘以 44 就是每个li 的背景y坐标  index就是我们的y坐标
+        var index = i * 44;
+        lis[i].style.backgroundPosition = '0 -' + index + 'px';
+    }
+</script>
+```
+
+
+
+
+
 #### 案例：显示隐藏文本框内容
 
 ![1550737006593](images/1550737006593.png)
 
 ![1550737019729](images/1550737019729.png)
+
+```html
+<style>
+    input {
+        color: #999;
+    }
+</style>
+
+<input type="text" value="手机">
+<script>
+    // 1.获取元素
+    var text = document.querySelector('input');
+    // 2.注册事件 获得焦点事件 onfocus 
+    text.onfocus = function() {
+        // console.log('得到了焦点');
+        if (this.value === '手机') {
+            this.value = '';
+        }
+        // 获得焦点需要把文本框里面的文字颜色变黑
+        this.style.color = '#333';
+    }
+    // 3. 注册事件 失去焦点事件 onblur
+    text.onblur = function() {
+        // console.log('失去了焦点');
+        if (this.value === '') {
+            this.value = '手机';
+        }
+        // 失去焦点需要把文本框里面的文字颜色变浅色
+        this.style.color = '#999';
+    }
+</script>
+```
+
+
 
 #### 方式2：通过操作className属性
 
@@ -492,25 +649,38 @@ JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScri
 
 **案例代码**
 
-```js
-<body>
-    <div class="first">文本</div>
-    <script>
-        // 1. 使用 element.style 获得修改元素样式  如果样式比较少 或者 功能简单的情况下使用
-        var test = document.querySelector('div');
-        test.onclick = function() {
-            // this.style.backgroundColor = 'purple';
-            // this.style.color = '#fff';
-            // this.style.fontSize = '25px';
-            // this.style.marginTop = '100px';
+```html
+<style>
+    div {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+    }
 
-            // 2. 我们可以通过 修改元素的className更改元素的样式 适合于样式较多或者功能复杂的情况
-            // 3. 如果想要保留原先的类名，我们可以这么做 多类名选择器
-            // this.className = 'change';
-            this.className = 'first change';
-        }
-    </script>
-</body>
+    .change {
+        background-color: purple;
+        color: #fff;
+        font-size: 25px;
+        margin-top: 100px;
+    }
+</style>
+<div class="first">文本</div>
+<script>
+    // 1. 使用 element.style 获得修改元素样式  如果样式比较少 或者 功能简单的情况下使用
+    var test = document.querySelector('div');
+    test.onclick = function() {
+        // this.style.backgroundColor = 'purple';
+        // this.style.color = '#fff';
+        // this.style.fontSize = '25px';
+        // this.style.marginTop = '100px';
+        // 让我们当前元素的类名改为了 change
+
+        // 2. 我们可以通过 修改元素的className更改元素的样式 适合于样式较多或者功能复杂的情况
+        // 3. 如果想要保留原先的类名，我们可以这么做 多类名选择器
+        // this.className = 'change';
+        this.className = 'first change';
+    }
+</script>
 ```
 
 #### 案例：密码框格式提示错误信息
@@ -519,7 +689,7 @@ JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScri
 
 ![1550737284218](images/1550737284218.png)
 
-## 1.6. 今日总结
+## 6. 今日总结
 
 ![1550737354861](images/1550737354861.png)
 
