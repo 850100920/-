@@ -274,7 +274,17 @@ JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScri
 ```
 
 ### 4.4. 常见的鼠标事件
-![1550734506084](images/1550734506084.png)
+
+| 鼠标事件    | 触发条件         |
+| ----------- | ---------------- |
+| onclick     | 鼠标点击左键触发 |
+| onmouseover | 鼠标经过触发     |
+| onmouseout  | 鼠标离开触发     |
+| onfocus     | 获得鼠标焦点触发 |
+| onblur      | 失去鼠标焦点触发 |
+| onmousemove | 鼠标移动触发     |
+| onmouseup   | 鼠标弹起触发     |
+| onmousedown | 鼠标按下触发     |
 
 ### 4.5. 分析事件三要素
 
@@ -689,7 +699,124 @@ JavaScript 使我们有能力创建动态页面，而事件是可以被 JavaScri
 
 ![1550737284218](images/1550737284218.png)
 
+```html
+<style>
+    div {
+        width: 600px;
+        margin: 100px auto;
+    }
+
+    .message {
+        display: inline-block;
+        font-size: 12px;
+        color: #999;
+        background: url(images/mess.png) no-repeat left center;
+        padding-left: 20px;
+    }
+
+    .wrong {
+        color: red;
+        background-image: url(images/wrong.png);
+    }
+
+    .right {
+        color: green;
+        background-image: url(images/right.png);
+    }
+</style>
+
+<div class="register">
+    <input type="password" class="ipt">
+    <p class="message">请输入6~16位密码</p>
+</div>
+<script>
+    // 首先判断的事件是表单失去焦点 onblur
+    // 如果输入正确则提示正确的信息颜色为绿色小图标变化
+    // 如果输入不是6到16位，则提示错误信息颜色为红色 小图标变化
+    // 因为里面变化样式较多，我们采取className修改样式
+    // 1.获取元素
+
+    var ipt = document.querySelector('.ipt');
+    var message = document.querySelector('.message');
+    //2. 注册事件 失去焦点
+    ipt.onblur = function() {
+        // 根据表单里面值的长度 ipt.value.length
+        if (this.value.length < 6 || this.value.length > 16) {
+            // console.log('错误');
+            message.className = 'message wrong';
+            message.innerHTML = '您输入的位数不对要求6~16位';
+        } else {
+            message.className = 'message right';
+            message.innerHTML = '您输入的正确';
+        }
+    }
+</script>
+```
+
+
+
 ## 6. 今日总结
 
 ![1550737354861](images/1550737354861.png)
+
+## 7. 课后作业
+
+### 案例一(世纪佳缘)
+
+```html
+<head>
+    <title>Document</title>
+    <style>
+        .input_text {
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input class="input_text" type="text" value="邮箱/ID/手机号">
+    </div>
+    <script>
+        var imputObj = document.querySelector('.input_text');
+        imputObj.onfocus = function () {
+            if (this.value === '邮箱/ID/手机号') {
+                this.value = '';
+            }
+            this.style.color = '#000'
+            this.style.outlineColor = 'pink'
+        }
+        imputObj.onblur = function () {
+            if (this.value === '') {
+                this.value = '邮箱/ID/手机号'
+                this.style.color = '#999'
+            }
+        }
+    </script>
+</body> 
+```
+
+### 案例二(开关灯)
+
+```html
+<body class="body">
+    <button>关灯</button>
+</body>
+<script>
+    var btn = document.querySelector('button');
+    var bodyEle = document.body;
+    var flag = 0;
+    btn.onclick = function () {
+        if (flag == 0) {
+            bodyEle.style.background = '#000';
+            this.innerHTML = '开灯'
+            flag = 1;
+        } else {
+            bodyEle.style.background = '#fff';
+            this.innerHTML = '关灯'
+            flag = 0;
+        }
+    }
+</script>
+```
 

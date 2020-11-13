@@ -1,4 +1,4 @@
-# day02 - Web APIs
+## day02 - Web APIs
 
 > 学习目标：
 >
@@ -22,9 +22,9 @@
 >
 > 能够使用createElement创建页面元素
 
-## 1.1. 排他操作
+## 1. 排他操作
 
-### 1.1.1 排他思想
+### 1.1 排他思想
 
 ![1550914482628](images/1550914482628.png)
 
@@ -36,39 +36,40 @@
 
 3. 注意顺序不能颠倒，首先干掉其他人，再设置自己
 
-```js
-    <button>按钮1</button>
-    <button>按钮2</button>
-    <button>按钮3</button>
-    <button>按钮4</button>
-    <button>按钮5</button>
-    <script>
-        // 1. 获取所有按钮元素
-        var btns = document.getElementsByTagName('button');
-        // btns得到的是伪数组  里面的每一个元素 btns[i]
-        for (var i = 0; i < btns.length; i++) {
-            btns[i].onclick = function() {
-                // (1) 我们先把所有的按钮背景颜色去掉  干掉所有人
-                for (var i = 0; i < btns.length; i++) {
-                    btns[i].style.backgroundColor = '';
-                }
-                // (2) 然后才让当前的元素背景颜色为pink 留下我自己
-                this.style.backgroundColor = 'pink';
-
+```html
+<button>按钮1</button>
+<button>按钮2</button>
+<button>按钮3</button>
+<button>按钮4</button>
+<button>按钮5</button>
+<script>
+    // 1. 获取所有按钮元素
+    var btns = document.getElementsByTagName('button');
+    // btns得到的是伪数组  里面的每一个元素 btns[i]
+    for (var i = 0; i < btns.length; i++) {
+        btns[i].onclick = function() {
+            // (1) 我们先把所有的按钮背景颜色去掉  干掉所有人
+            for (var i = 0; i < btns.length; i++) {
+                btns[i].style.backgroundColor = '';
             }
+            // (2) 然后才让当前的元素背景颜色为pink 留下我自己
+            this.style.backgroundColor = 'pink';
+
         }
-    </script>
+    }
+    //2. 首先先排除其他人，然后才设置自己的样式 这种排除其他人的思想我们成为排他思想
+</script>
 ```
 
 
 
-## 1.2 案例：百度换肤
+## 2 案例：百度换肤
 
 ![1550914640677](images/1550914640677.png)
 
 ![1550914663042](images/1550914663042.png)
 
-```js
+```html
 <body>
     <ul class="baidu">
         <li><img src="images/1.jpg"></li>
@@ -93,76 +94,74 @@
 </body>
 ```
 
-## 1.3 案例：表格隔行变色
+## 3 案例：表格隔行变色
 
 ![1550914791881](images/1550914791881.png)
 
 ![1550914812202](images/1550914812202.png)
 
-```js
-    <script>
-        // 1.获取元素 获取的是 tbody 里面所有的行
-        var trs = document.querySelector('tbody').querySelectorAll('tr');
-        // 2. 利用循环绑定注册事件
-        for (var i = 0; i < trs.length; i++) {
-            // 3. 鼠标经过事件 onmouseover
-            trs[i].onmouseover = function() {
-                    // console.log(11);
-                    this.className = 'bg';
-                }
-                // 4. 鼠标离开事件 onmouseout
-            trs[i].onmouseout = function() {
-                this.className = '';
-            }
+```html
+<script>
+    // 1.获取元素 获取的是 tbody 里面所有的行
+    var trs = document.querySelector('tbody').querySelectorAll('tr');
+    // 2. 利用循环绑定注册事件
+    for (var i = 0; i < trs.length; i++) {
+        // 3. 鼠标经过事件 onmouseover
+        trs[i].onmouseover = function() {
+            // console.log(11);
+            this.className = 'bg';
         }
-    </script>
+        // 4. 鼠标离开事件 onmouseout
+        trs[i].onmouseout = function() {
+            this.className = '';
+        }
+    }
+</script>
 ```
 
-## 1.4 案例：全选
+## 4 案例：全选
 
 ![1550914980274](images/1550914980274.png)
 
 ![1550915005393](images/1550915005393.png)
 
-```js
-    <script>
-        // 1. 全选和取消全选做法：  让下面所有复选框的checked属性（选中状态） 跟随 全选按钮即可
-        // 获取元素
-        
-        var j_cbAll = document.getElementById('j_cbAll'); 
-        var j_tbs = document.getElementById('j_tb').getElementsByTagName('input'); 
-        // 全选按钮注册事件
-        j_cbAll.onclick = function() {
-                // this.checked 当前复选框的选中状态
-                console.log(this.checked);
-                for (var i = 0; i < j_tbs.length; i++) {
-                    j_tbs[i].checked = this.checked;
-                }
-         }
-         // 给所有的子复选框注册单击事件
+```html
+<script>
+    // 1. 全选和取消全选做法：  让下面所有复选框的checked属性（选中状态） 跟随 全选按钮即可
+    // 获取元素
+    var j_cbAll = document.getElementById('j_cbAll'); // 全选按钮
+    var j_tbs = document.getElementById('j_tb').getElementsByTagName('input'); // 下面所有的复选框
+    // 注册事件
+    j_cbAll.onclick = function() {
+        // this.checked 它可以得到当前复选框的选中状态如果是true 就是选中，如果是false 就是未选中
+        console.log(this.checked);
         for (var i = 0; i < j_tbs.length; i++) {
-            j_tbs[i].onclick = function() {
-                // flag 控制全选按钮是否选中
-                var flag = true;
-                // 每次点击下面的复选框都要循环检查者4个小按钮是否全被选中
-                for (var i = 0; i < j_tbs.length; i++) {
-                    if (!j_tbs[i].checked) {
-                        flag = false;
-                        break; 
-                    }
-                }
-                // 设置全选按钮的状态
-                j_cbAll.checked = flag;
-            }
+            j_tbs[i].checked = this.checked;
         }
-    </script>
+    }
+    // 2. 下面复选框需要全部选中， 上面全选才能选中做法： 给下面所有复选框绑定点击事件，每次点击，都要循环查看下面所有的复选框是否有没选中的，如果有一个没选中的， 上面全选就不选中。
+    for (var i = 0; i < j_tbs.length; i++) {
+        j_tbs[i].onclick = function() {
+            // flag 控制全选按钮是否选中
+            var flag = true;
+            // 每次点击下面的复选框都要循环检查者4个小按钮是否全被选中
+            for (var i = 0; i < j_tbs.length; i++) {
+                if (!j_tbs[i].checked) {
+                    flag = false;
+                    break; // 退出for循环 这样可以提高执行效率 因为只要有一个没有选中，剩下的就无需循环判断了
+                }
+            }
+            j_cbAll.checked = flag;
+        }
+    }
+</script>
 ```
 
 
 
-## 1.5. 自定义属性操作
+## 5. 自定义属性操作
 
-### 1.5.1 获取属性值
+### 5.1 获取属性值
 
 ![1550915376339](images/1550915376339.png)
 
@@ -181,7 +180,7 @@
 
 
 
-### 1.5.2. 设置属性值
+### 5.2. 设置属性值
 
 ![1550915445026](images/1550915445026.png)
 
@@ -197,7 +196,7 @@
 
 
 
-### 1.5.3. 移出属性
+### 5.3. 移出属性
 
 ![1550915513137](images/1550915513137.png)
 
@@ -209,7 +208,7 @@
 
 
 
-### 1.5.4. 案例：tab栏
+### 5.4. 案例：tab栏
 
 ![1550915567627](images/1550915567627.png)
 
@@ -249,7 +248,7 @@
 
 
 
-### 1.5.5. H5自定义属性
+### 5.5. H5自定义属性
 
 自定义属性目的：是为了保存并使用数据。有些数据可以保存到页面中而不用保存到数据库中。
 
@@ -285,9 +284,9 @@ H5给我们新增了自定义属性：
 
 
 
-## 1.6. 节点操作
+## 6. 节点操作
 
-### 1.6.1. 节点概述
+### 6.1. 节点概述
 
 ​	网页中的所有内容都是节点（标签、属性、文本、注释等），在DOM 中，节点使用 node 来表示。
 
@@ -299,13 +298,13 @@ H5给我们新增了自定义属性：
 
 ![1550970986988](images/1550970986988.png)
 
-### 1.6.2. 节点层级
+### 6.2. 节点层级
 
 ​	利用 DOM 树可以把节点划分为不同的层级关系，常见的是**父子兄层级关系**。
 
 ​    ![1550971058781](images/1550971058781.png)
 
-### 1.6.3. 父级节点
+### 6.3. 父级节点
 
 ![1550971196686](images/1550971196686.png)
 
@@ -324,7 +323,7 @@ H5给我们新增了自定义属性：
     </script>
 ```
 
-### 1.6.4. 子节点
+### 6.4. 子节点
 
 **所有子节点**
 
@@ -396,7 +395,7 @@ H5给我们新增了自定义属性：
     </script>
 ```
 
-### 1.6.5. 案例：新浪下拉菜单
+### 6.5. 案例：新浪下拉菜单
 
 
 
@@ -423,15 +422,15 @@ H5给我们新增了自定义属性：
     </script>
 ```
 
-### 1.6.6. 兄弟节点
+### 6.6. 兄弟节点
 
 **下一个兄弟节点**
 
-![1550973538696](../../../../../%E5%A4%87%E8%AF%BE%E8%B5%84%E6%96%99/20190220-%E8%AF%BE%E4%BB%B6%E5%88%B6%E4%BD%9C/Web%20APIs/Web%20APIs-day02/4-%E7%AC%94%E8%AE%B0/images/1550973538696.png)
+![1550973538696](images/1550973538696.png)
 
 **上一个兄弟节点**
 
-![1550973558511](../../../../../%E5%A4%87%E8%AF%BE%E8%B5%84%E6%96%99/20190220-%E8%AF%BE%E4%BB%B6%E5%88%B6%E4%BD%9C/Web%20APIs/Web%20APIs-day02/4-%E7%AC%94%E8%AE%B0/images/1550973558511.png)
+![1550973558511](images/1550973558511.png)
 
 ```js
     <div>我是div</div>
@@ -449,15 +448,15 @@ H5给我们新增了自定义属性：
 
 **下一个兄弟元素节点（有兼容性问题）**
 
-![1550973610223](../../../../../%E5%A4%87%E8%AF%BE%E8%B5%84%E6%96%99/20190220-%E8%AF%BE%E4%BB%B6%E5%88%B6%E4%BD%9C/Web%20APIs/Web%20APIs-day02/4-%E7%AC%94%E8%AE%B0/images/1550973610223.png)
+![1550973610223](images/1550973610223.png)
 
 **上一个兄弟元素节点（有兼容性问题）**
 
-![1550973630150](../../../../../%E5%A4%87%E8%AF%BE%E8%B5%84%E6%96%99/20190220-%E8%AF%BE%E4%BB%B6%E5%88%B6%E4%BD%9C/Web%20APIs/Web%20APIs-day02/4-%E7%AC%94%E8%AE%B0/images/1550973630150.png)
+![1550973630150](images/1550973630150.png)
 
-![1550973722805](../../../../../%E5%A4%87%E8%AF%BE%E8%B5%84%E6%96%99/20190220-%E8%AF%BE%E4%BB%B6%E5%88%B6%E4%BD%9C/Web%20APIs/Web%20APIs-day02/4-%E7%AC%94%E8%AE%B0/images/1550973722805.png)
+![1550973722805](images/1550973722805.png)
 
-![1550973799759](../../../../../%E5%A4%87%E8%AF%BE%E8%B5%84%E6%96%99/20190220-%E8%AF%BE%E4%BB%B6%E5%88%B6%E4%BD%9C/Web%20APIs/Web%20APIs-day02/4-%E7%AC%94%E8%AE%B0/images/1550973799759.png)
+![1550973799759](images/1550973799759.png)
 
 ```js
    function getNextElementSibling(element) {
