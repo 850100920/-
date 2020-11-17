@@ -165,17 +165,17 @@
 
 ![1550915376339](images/1550915376339.png)
 
-```js
-    <div id="demo" index="1" class="nav"></div>
-    <script>
-        var div = document.querySelector('div');
-        // 1. 获取元素的属性值
-        // (1) element.属性
-        console.log(div.id);
-        //(2) element.getAttribute('属性')  get得到获取 attribute 属性的意思 我们程序员自己添加的属性我们称为自定义属性 index
-        console.log(div.getAttribute('id'));
-        console.log(div.getAttribute('index'));
-	</script>
+```html
+<div id="demo" index="1" class="nav"></div>
+<script>
+    var div = document.querySelector('div');
+    // 1. 获取元素的属性值
+    // (1) element.属性
+    console.log(div.id);
+    //(2) element.getAttribute('属性')  get得到获取 attribute 属性的意思 我们程序员自己添加的属性我们称为自定义属性 index
+    console.log(div.getAttribute('id'));
+    console.log(div.getAttribute('index'));
+</script>
 ```
 
 
