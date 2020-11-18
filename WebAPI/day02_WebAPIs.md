@@ -185,13 +185,13 @@
 ![1550915445026](images/1550915445026.png)
 
 ```js
-        // 2. 设置元素属性值
-        // (1) element.属性= '值'
-        div.id = 'test';
-        div.className = 'navs';
-        // (2) element.setAttribute('属性', '值');  主要针对于自定义属性
-        div.setAttribute('index', 2);
-        div.setAttribute('class', 'footer'); // class 特殊  这里面写的就是
+// 2. 设置元素属性值
+// (1) element.属性= '值'
+div.id = 'test';
+div.className = 'navs';
+// (2) element.setAttribute('属性', '值');  主要针对于自定义属性
+div.setAttribute('index', 2);
+div.setAttribute('class', 'footer'); // class 特殊  这里面写的就是
 ```
 
 
@@ -201,9 +201,9 @@
 ![1550915513137](images/1550915513137.png)
 
 ```js
-		// class 不是className
-        // 3 移除属性 removeAttribute(属性)    
-        div.removeAttribute('index');
+// class 不是className
+// 3 移除属性 removeAttribute(属性)    
+div.removeAttribute('index');
 ```
 
 
@@ -214,36 +214,37 @@
 
 ![1550915590707](images/1550915590707.png)
 
-```js
-    <script>
-        // 获取元素
-        var tab_list = document.querySelector('.tab_list');
-        var lis = tab_list.querySelectorAll('li');
-        var items = document.querySelectorAll('.item');
-        // for循环，给选项卡绑定点击事件
-        for (var i = 0; i < lis.length; i++) {
-            // 开始给5个小li 设置索引号 
-            lis[i].setAttribute('index', i);
-            lis[i].onclick = function() {
-                // 1. 上的模块选项卡，当前这一个底色会是红色，其余不变（排他思想）
-                // 干掉所有人 其余的li清除 class 这个类
-                for (var i = 0; i < lis.length; i++) {
-                    lis[i].className = '';
-                }
-                // 留下我自己 
-                this.className = 'current';
-                // 2. 下面的显示内容模块
-                var index = this.getAttribute('index');
-                console.log(index);
-                // 干掉所有人 让其余的item 这些div 隐藏
-                for (var i = 0; i < items.length; i++) {
-                    items[i].style.display = 'none';
-                }
-                // 留下我自己 让对应的item 显示出来
-                items[index].style.display = 'block';
+```html
+<script>
+    // 获取元素
+    var tab_list = document.querySelector('.tab_list');
+    var lis = tab_list.querySelectorAll('li');
+    var items = document.querySelectorAll('.item');
+    // for循环绑定点击事件
+    for (var i = 0; i < lis.length; i++) {
+        // 开始给5个小li 设置索引号 
+        lis[i].setAttribute('index', i);
+        lis[i].onclick = function() {
+            // 1. 上的模块选项卡，点击某一个，当前这一个底色会是红色，其余不变（排他思想） 修改类名的方式
+
+            // 干掉所有人 其余的li清除 class 这个类
+            for (var i = 0; i < lis.length; i++) {
+                lis[i].className = '';
             }
+            // 留下我自己 
+            this.className = 'current';
+            // 2. 下面的显示内容模块
+            var index = this.getAttribute('index');
+            console.log(index);
+            // 干掉所有人 让其余的item 这些div 隐藏
+            for (var i = 0; i < items.length; i++) {
+                items[i].style.display = 'none';
+            }
+            // 留下我自己 让对应的item 显示出来
+            items[index].style.display = 'block';
         }
-    </script>
+    }
+</script>
 ```
 
 
@@ -262,24 +263,24 @@ H5给我们新增了自定义属性：
 
 ![1550915815571](images/1550915815571.png)
 
-```js
-    <div getTime="20" data-index="2" data-list-name="andy"></div>
-    <script>
-        var div = document.querySelector('div');
-        // console.log(div.getTime);
-        console.log(div.getAttribute('getTime'));
-        div.setAttribute('data-time', 20);
-        console.log(div.getAttribute('data-index'));
-        console.log(div.getAttribute('data-list-name'));
-        // h5新增的获取自定义属性的方法 它只能获取data-开头的
-        // dataset 是一个集合里面存放了所有以data开头的自定义属性
-        console.log(div.dataset);
-        console.log(div.dataset.index);
-        console.log(div.dataset['index']);
-        // 如果自定义属性里面有多个-链接的单词，我们获取的时候采取 驼峰命名法
-        console.log(div.dataset.listName);
-        console.log(div.dataset['listName']);
-    </script>
+```html
+<div getTime="20" data-index="2" data-list-name="andy"></div>
+<script>
+    var div = document.querySelector('div');
+    // console.log(div.getTime);
+    console.log(div.getAttribute('getTime'));
+    div.setAttribute('data-time', 20);
+    console.log(div.getAttribute('data-index'));
+    console.log(div.getAttribute('data-list-name'));
+    // h5新增的获取自定义属性的方法 它只能获取data-开头的
+    // dataset 是一个集合里面存放了所有以data开头的自定义属性
+    console.log(div.dataset);
+    console.log(div.dataset.index);
+    console.log(div.dataset['index']);
+    // 如果自定义属性里面有多个-链接的单词，我们获取的时候采取 驼峰命名法
+    console.log(div.dataset.listName);
+    console.log(div.dataset['listName']);
+</script>
 ```
 
 
@@ -308,19 +309,20 @@ H5给我们新增了自定义属性：
 
 ![1550971196686](images/1550971196686.png)
 
-```js
-    <div class="demo">
-        <div class="box">
-            <span class="erweima">×</span>
-        </div>
+```html
+<div class="demo">
+    <div class="box">
+        <span class="erweima">×</span>
     </div>
-    <script>
-        // 1. 父节点 parentNode
-        var erweima = document.querySelector('.erweima');
-        // var box = document.querySelector('.box');
-        // 得到的是离元素最近的父级节点(亲爸爸) 如果找不到父节点就返回为 null
-        console.log(erweima.parentNode);
-    </script>
+</div>
+
+<script>
+    // 1. 父节点 parentNode
+    var erweima = document.querySelector('.erweima');
+    // var box = document.querySelector('.box');
+    // 得到的是离元素最近的父级节点(亲爸爸) 如果找不到父节点就返回为 null
+    console.log(erweima.parentNode);
+</script>
 ```
 
 ### 6.4. 子节点
@@ -333,24 +335,24 @@ H5给我们新增了自定义属性：
 
 ![1550971325828](images/1550971325828.png)
 
-```js
-    <ul>
-        <li>我是li</li>
-        <li>我是li</li>
-        <li>我是li</li>
-        <li>我是li</li>
-    </ul>
-    <script>
-        // DOM 提供的方法（API）获取
-        var ul = document.querySelector('ul');
-        var lis = ul.querySelectorAll('li');
-        // 1. 子节点  childNodes 所有的子节点 包含 元素节点 文本节点等等
-        console.log(ul.childNodes);
-        console.log(ul.childNodes[0].nodeType);
-        console.log(ul.childNodes[1].nodeType);
-        // 2. children 获取所有的子元素节点 也是我们实际开发常用的
-        console.log(ul.children);
-    </script>
+```html
+<ul>
+    <li>我是li</li>
+    <li>我是li</li>
+    <li>我是li</li>
+    <li>我是li</li>
+</ul>
+<script>
+    // DOM 提供的方法（API）获取
+    var ul = document.querySelector('ul');
+    var lis = ul.querySelectorAll('li');
+    // 1. 子节点  childNodes 所有的子节点 包含 元素节点 文本节点等等
+    console.log(ul.childNodes);
+    console.log(ul.childNodes[0].nodeType);
+    console.log(ul.childNodes[1].nodeType);
+    // 2. children 获取所有的子元素节点 也是我们实际开发常用的
+    console.log(ul.children);
+</script>
 ```
 
 **第1个子节点**
@@ -373,26 +375,26 @@ H5给我们新增了自定义属性：
 
 ![1550972648014](images/1550972648014.png)
 
-```js
-    <ol>
-        <li>我是li1</li>
-        <li>我是li2</li>
-        <li>我是li3</li>
-        <li>我是li4</li>
-        <li>我是li5</li>
-    </ol>
-    <script>
-        var ol = document.querySelector('ol');
-        // 1. firstChild 第一个子节点 不管是文本节点还是元素节点
-        console.log(ol.firstChild);
-        console.log(ol.lastChild);
-        // 2. firstElementChild 返回第一个子元素节点 ie9才支持
-        console.log(ol.firstElementChild);
-        console.log(ol.lastElementChild);
-        // 3. 实际开发的写法  既没有兼容性问题又返回第一个子元素
-        console.log(ol.children[0]);
-        console.log(ol.children[ol.children.length - 1]);
-    </script>
+```html
+<ol>
+    <li>我是li1</li>
+    <li>我是li2</li>
+    <li>我是li3</li>
+    <li>我是li4</li>
+    <li>我是li5</li>
+</ol>
+<script>
+    var ol = document.querySelector('ol');
+    // 1. firstChild 第一个子节点 不管是文本节点还是元素节点
+    console.log(ol.firstChild);
+    console.log(ol.lastChild);
+    // 2. firstElementChild 返回第一个子元素节点 ie9才支持
+    console.log(ol.firstElementChild);
+    console.log(ol.lastElementChild);
+    // 3. 实际开发的写法  既没有兼容性问题又返回第一个子元素
+    console.log(ol.children[0]);
+    console.log(ol.children[ol.children.length - 1]);
+</script>
 ```
 
 ### 6.5. 案例：新浪下拉菜单
@@ -405,21 +407,21 @@ H5给我们新增了自定义属性：
 
 ![1550975049176](images/1550975049176.png)
 
-```js
-    <script>
-        // 1. 获取元素
-        var nav = document.querySelector('.nav');
-        var lis = nav.children; // 得到4个小li
-        // 2.循环注册事件
-        for (var i = 0; i < lis.length; i++) {
-            lis[i].onmouseover = function() {
-                this.children[1].style.display = 'block';
-            }
-            lis[i].onmouseout = function() {
-                this.children[1].style.display = 'none';
-            }
+```html
+<script>
+    // 1. 获取元素
+    var nav = document.querySelector('.nav');
+    var lis = nav.children; // 得到4个小li
+    // 2.循环注册事件
+    for (var i = 0; i < lis.length; i++) {
+        lis[i].onmouseover = function() {
+            this.children[1].style.display = 'block';
         }
-    </script>
+        lis[i].onmouseout = function() {
+            this.children[1].style.display = 'none';
+        }
+    }
+</script>
 ```
 
 ### 6.6. 兄弟节点
