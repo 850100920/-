@@ -434,18 +434,18 @@ H5给我们新增了自定义属性：
 
 ![1550973558511](images/1550973558511.png)
 
-```js
-    <div>我是div</div>
-    <span>我是span</span>
-    <script>
-        var div = document.querySelector('div');
-        // 1.nextSibling 下一个兄弟节点 包含元素节点或者 文本节点等等
-        console.log(div.nextSibling);
-        console.log(div.previousSibling);
-        // 2. nextElementSibling 得到下一个兄弟元素节点
-        console.log(div.nextElementSibling);
-        console.log(div.previousElementSibling);
-    </script>
+```html
+<div>我是div</div>
+<span>我是span</span>
+<script>
+    var div = document.querySelector('div');
+    // 1.nextSibling 下一个兄弟节点 包含元素节点或者 文本节点等等
+    console.log(div.nextSibling);
+    console.log(div.previousSibling);
+    // 2. nextElementSibling 得到下一个兄弟元素节点
+    console.log(div.nextElementSibling);
+    console.log(div.previousElementSibling);
+</script>
 ```
 
 **下一个兄弟元素节点（有兼容性问题）**
@@ -461,15 +461,15 @@ H5给我们新增了自定义属性：
 ![1550973799759](images/1550973799759.png)
 
 ```js
-   function getNextElementSibling(element) {
-      var el = element;
-      while (el = el.nextSibling) {
+function getNextElementSibling(element) {
+    var el = element;
+    while (el = el.nextSibling) {
         if (el.nodeType === 1) {
             return el;
         }
-      }
-      return null;
-    }  
+    }
+    return null;
+}  
 ```
 
 ### 1.6.7. 创建节点
