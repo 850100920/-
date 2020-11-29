@@ -82,7 +82,7 @@ DOM树 又称为文档树模型，把文档映射成树形结构，通过节点�
 
 ### 3.1. 根据ID获取
 
-```js
+```html
 语法：document.getElementById(id)
 作用：根据ID获取元素对象
 参数：id值，区分大小写的字符串
