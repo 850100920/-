@@ -350,7 +350,7 @@ H5给我们新增了自定义属性：
     console.log(ul.childNodes);
     console.log(ul.childNodes[0].nodeType);
     console.log(ul.childNodes[1].nodeType);
-    // 2. children 获取所有的子元素节点 也是我们实际开发常用的
+    // 2. children 获取所有的子元素节点 也是我们实际开发常用的    (重点)
     console.log(ul.children);
 </script>
 ```
@@ -391,7 +391,7 @@ H5给我们新增了自定义属性：
     // 2. firstElementChild 返回第一个子元素节点 ie9才支持
     console.log(ol.firstElementChild);
     console.log(ol.lastElementChild);
-    // 3. 实际开发的写法  既没有兼容性问题又返回第一个子元素
+    // 3. 实际开发的写法  既没有兼容性问题又返回第一个子元素       (重点)
     console.log(ol.children[0]);
     console.log(ol.children[ol.children.length - 1]);
 </script>
@@ -472,22 +472,23 @@ function getNextElementSibling(element) {
 }  
 ```
 
-### 1.6.7. 创建节点
+### 6.7. 创建节点
 
 ![1550975514321](images/1550975514321.png)
 
-### 1.6.8. 添加节点
+### 6.8. 添加节点
 
 ![1550975640170](images/1550975640170.png)
 
-```js
+```html
+<body>
     <ul>
         <li>123</li>
     </ul>
     <script>
         // 1. 创建节点元素节点
         var li = document.createElement('li');
-        // 2. 添加节点 node.appendChild(child)  node 父级  child 是子级 后面追加元素
+        // 2. 添加节点 node.appendChild(child)  node 父级  child 是子级 后面追加元素  类似于数组中的push
         var ul = document.querySelector('ul');
         ul.appendChild(li);
         // 3. 添加节点 node.insertBefore(child, 指定元素);
@@ -495,15 +496,16 @@ function getNextElementSibling(element) {
         ul.insertBefore(lili, ul.children[0]);
         // 4. 我们想要页面添加一个新的元素 ： 1. 创建元素 2. 添加元素
     </script>
+</body>
 ```
 
-### 1.6.9. 案例：简单版发布留言
+### 6.9. 案例：简单版发布留言
 
 ![1550975849302](images/1550975849302.png)
 
 ![1550975887017](images/1550975887017.png)
 
-```js
+```html
 <body>
     <textarea name="" id=""></textarea>
     <button>发布</button>
@@ -530,6 +532,63 @@ function getNextElementSibling(element) {
                 // ul.appendChild(li);
                 ul.insertBefore(li, ul.children[0]);
             }
+        }
+    </script>
+</body>
+```
+
+### 6.10. 案例：简单添加表格
+
+```html
+<body>
+    <div id="dv">
+        请输入姓名:
+        <input type="text" value="" id="uname" />
+        <br /> 请输入邮箱:
+        <input type="text" value="" id="email" />
+    </div>
+
+    <input type="button" value="添加" id="btn" />
+    <table border="1" cellpadding="0" cellspacing="0" id="tb">
+        <thead>
+            <tr>
+                <th>姓名</th>
+                <th>邮箱</th>
+            </tr>
+        </thead>
+        <tbody id="tbd">
+            <tr>
+                <td>小黑</td>
+                <td>xiaohei@126.com</td>
+            </tr>
+        </tbody>
+    </table>
+    <script>
+        //获取按钮
+        var btn = document.querySelector('#btn');
+        //注册点击事件
+        btn.onclick = function () {
+            //获取文本框 (两个)
+            var uname = document.querySelector('#uname');
+            var email = document.querySelector('#email');
+            //判断输入的值是否完全
+            if (uname.value == '' || email.value == '') {
+                alert('请输入正确内容!');
+                return;
+            }
+            //创建一行   tr  
+            var trObj = document.createElement('tr');
+            var tbd = document.querySelector('#tbd');
+            //把行加入到tbody中
+            tbd.appendChild(trObj)
+            //创建列  把输入的值给列 (两) 
+            var td1 = document.createElement('td');
+            td1.innerHTML = uname.value;
+            var td2 = document.createElement('td');
+            td2.innerHTML = email.value;
+            //把列添加到行中
+            trObj.appendChild(td1);
+            trObj.appendChild(td2);
         }
     </script>
 </body>

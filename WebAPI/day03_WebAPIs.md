@@ -20,169 +20,185 @@
 >
 > 能够完成跟随鼠标的天使案例
 
-## 1.1. 节点操作
+## 1. 节点操作
 
-### 1.1.1 删除节点
+### 1.1 删除节点
 
 ![1551163384254](images/1551163384254(1).png)
 
 node.removeChild() 方法从 node节点中删除一个子节点，返回删除的节点。
 
-```js
-    <button>删除</button>
-    <ul>
-        <li>熊大</li>
-        <li>熊二</li>
-        <li>光头强</li>
-    </ul>
-    <script>
-        // 1.获取元素
-        var ul = document.querySelector('ul');
-        var btn = document.querySelector('button');
-        // 2. 删除元素  node.removeChild(child)
-        // ul.removeChild(ul.children[0]);
-        // 3. 点击按钮依次删除里面的孩子
-        btn.onclick = function() {
-            if (ul.children.length == 0) {
-                this.disabled = true;
-            } else {
-                ul.removeChild(ul.children[0]);
-            }
+```html
+<button>删除</button>
+<ul>
+    <li>熊大</li>
+    <li>熊二</li>
+    <li>光头强</li>
+</ul>
+<script>
+    // 1.获取元素
+    var ul = document.querySelector('ul');
+    var btn = document.querySelector('button');
+    // 2. 删除元素  node.removeChild(child)
+    // ul.removeChild(ul.children[0]);
+    // 3. 点击按钮依次删除里面的孩子
+    btn.onclick = function() {
+        if (ul.children.length == 0) {
+            this.disabled = true;
+        } else {
+            ul.removeChild(ul.children[0]);
         }
-    </script>
+    }
+</script>
 ```
 
 
 
-### 1.1.2 案例：删除留言
+### 1.2 案例：删除留言
 
 ![1551163586475](images/1551163586475.png)
 
 ![1551163635501](images/1551163635501.png)
 
-```js
-    <textarea name="" id=""></textarea>
-    <button>发布</button>
-    <ul>
+```html
+<textarea name="" id=""></textarea>
+<button>发布</button>
+<ul>
 
-    </ul>
-    <script>
-        // 1. 获取元素
-        var btn = document.querySelector('button');
-        var text = document.querySelector('textarea');
-        var ul = document.querySelector('ul');
-        // 2. 注册事件
-        btn.onclick = function() {
-            if (text.value == '') {
-                alert('您没有输入内容');
-                return false;
-            } else {
-                // console.log(text.value);
-                // (1) 创建元素
-                var li = document.createElement('li');
-                // 先有li 才能赋值
-                li.innerHTML = text.value + "<a href='javascript:;'>删除</a>";
-                // (2) 添加元素
-                // ul.appendChild(li);
-                ul.insertBefore(li, ul.children[0]);
-                // (3) 删除元素 删除的是当前链接的li  它的父亲
-                var as = document.querySelectorAll('a');
-                for (var i = 0; i < as.length; i++) {
-                    as[i].onclick = function() {
-                        // 删除的是 li 当前a所在的li  this.parentNode;
-                        ul.removeChild(this.parentNode);
-                    }
+</ul>
+<script>
+    // 1. 获取元素
+    var btn = document.querySelector('button');
+    var text = document.querySelector('textarea');
+    var ul = document.querySelector('ul');
+    // 2. 注册事件
+    btn.onclick = function() {
+        if (text.value == '') {
+            alert('您没有输入内容');
+            return false;
+        } else {
+            // console.log(text.value);
+            // (1) 创建元素
+            var li = document.createElement('li');
+            // 先有li 才能赋值
+            li.innerHTML = text.value + "<a href='javascript:;'>删除</a>";
+            // (2) 添加元素
+            // ul.appendChild(li);
+            ul.insertBefore(li, ul.children[0]);
+            // (3) 删除元素 删除的是当前链接的li  它的父亲
+            var as = document.querySelectorAll('a');
+            for (var i = 0; i < as.length; i++) {
+                as[i].onclick = function() {
+                    // 删除的是 li 当前a所在的li  this.parentNode;
+                    ul.removeChild(this.parentNode);
                 }
             }
         }
-    </script>
+    }
+</script>
 ```
 
-### 1.1.3 复制（克隆）节点
+### 1.3 复制（克隆）节点
 
 ![1551163763825](images/1551163763825.png)
 
-```js
-    <ul>
-        <li>1111</li>
-        <li>2</li>
-        <li>3</li>
-    </ul>
-    <script>
-        var ul = document.querySelector('ul');
-        // 1. node.cloneNode(); 括号为空或者里面是false 浅拷贝 只复制标签不复制里面的内容
-        // 2. node.cloneNode(true); 括号为true 深拷贝 复制标签复制里面的内容
-        var lili = ul.children[0].cloneNode(true);
-        ul.appendChild(lili);
-    </script>
+```html
+<ul>
+    <li>1111</li>
+    <li>2</li>
+    <li>3</li>
+</ul>
+<script>
+    var ul = document.querySelector('ul');
+    // 1. node.cloneNode(); 括号为空或者里面是false 浅拷贝 只复制标签不复制里面的内容
+    // 2. node.cloneNode(true); 括号为true 深拷贝 复制标签复制里面的内容
+    var lili = ul.children[0].cloneNode(true);
+    ul.appendChild(lili);
+</script>
 ```
 
-### 1.1.4 案例：动态生成表格
+### 1.4 案例：动态生成表格
 
 ![1551163900675](images/1551163900675.png)
 
 ![1551163924396](images/1551163924396.png)
 
-```js
-    <script>
-        // 1.先去准备好学生的数据
-        var datas = [{
-            name: '魏璎珞',
-            subject: 'JavaScript',
-            score: 100
-        }, {
-            name: '弘历',
-            subject: 'JavaScript',
-            score: 98
-        }, {
-            name: '傅恒',
-            subject: 'JavaScript',
-            score: 99
-        }, {
-            name: '明玉',
-            subject: 'JavaScript',
-            score: 88
-        }, {
-            name: '大猪蹄子',
-            subject: 'JavaScript',
-            score: 0
-        }];
-        // 2. 往tbody 里面创建行： 有几个人（通过数组的长度）我们就创建几行
-        var tbody = document.querySelector('tbody');
-		// 遍历数组
-        for (var i = 0; i < datas.length; i++) { 
-            // 1. 创建 tr行
-            var tr = document.createElement('tr');
-            tbody.appendChild(tr);
-            // 2. 行里面创建单元格td 单元格的数量取决于每个对象里面的属性个数  
-            // 使用for in遍历学生对象
-            for (var k in datas[i]) { 
-                // 创建单元格 
-                var td = document.createElement('td');
-                // 把对象里面的属性值 datas[i][k] 给 td  
-                td.innerHTML = datas[i][k];
-                tr.appendChild(td);
-            }
-            // 3. 创建有删除2个字的单元格 
-            var td = document.createElement('td');
-            td.innerHTML = '<a href="javascript:;">删除 </a>';
-            tr.appendChild(td);
+```html
+<table cellspacing="0">
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>科目</th>
+            <th>成绩</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
 
+    </tbody>
+</table>
+<script>
+    // 1.先去准备好学生的数据
+    var datas = [{
+        name: '魏璎珞',
+        subject: 'JavaScript',
+        score: 100
+    }, {
+        name: '弘历',
+        subject: 'JavaScript',
+        score: 98
+    }, {
+        name: '傅恒',
+        subject: 'JavaScript',
+        score: 99
+    }, {
+        name: '明玉',
+        subject: 'JavaScript',
+        score: 88
+    }, {
+        name: '大猪蹄子',
+        subject: 'JavaScript',
+        score: 0
+    }];
+    // 2. 往tbody 里面创建行： 有几个人（通过数组的长度）我们就创建几行
+    var tbody = document.querySelector('tbody');
+    for (var i = 0; i < datas.length; i++) { // 外面的for循环管行 tr
+        // 1. 创建 tr行
+        var tr = document.createElement('tr');
+        tbody.appendChild(tr);
+        // 2. 行里面创建单元格(跟数据有关系的3个单元格) td 单元格的数量取决于每个对象里面的属性个数  for循环遍历对象 datas[i]
+        for (var k in datas[i]) { // 里面的for循环管列 td
+            // 创建单元格 
+            var td = document.createElement('td');
+            // 把对象里面的属性值 datas[i][k] 给 td  
+            // console.log(datas[i][k]);
+            td.innerHTML = datas[i][k];
+            tr.appendChild(td);
         }
-        // 4. 删除操作 开始 
-        var as = document.querySelectorAll('a');
-        for (var i = 0; i < as.length; i++) {
-            as[i].onclick = function() {
-                // 点击a 删除 当前a 所在的行(链接的爸爸的爸爸)  node.removeChild(child)  
-                tbody.removeChild(this.parentNode.parentNode)
-            }
+        // 3. 创建有删除2个字的单元格 
+        var td = document.createElement('td');
+        td.innerHTML = '<a href="javascript:;">删除 </a>';
+        tr.appendChild(td);
+
+    }
+    // 4. 删除操作 开始 
+    var as = document.querySelectorAll('a');
+    for (var i = 0; i < as.length; i++) {
+        as[i].onclick = function() {
+            // 点击a 删除 当前a 所在的行(链接的爸爸的爸爸)  node.removeChild(child)  
+            tbody.removeChild(this.parentNode.parentNode)
         }
-    </script>
+    }
+    // for(var k in obj) {
+    //     k 得到的是属性名
+    //     obj[k] 得到是属性值
+    // }
+</script>
 ```
 
 
 
-### 1.1.5 创建元素的三种方式
+### 1.5 创建元素的三种方式
 
 ![1551164214925](images/1551164214925.png)
 
@@ -216,7 +232,7 @@ node.removeChild() 方法从 node节点中删除一个子节点，返回删除�
 
 
 
-### 1.1.6 innerTHML和createElement效率对比
+### 1.6 innerTHML和createElement效率对比
 
 **innerHTML字符串拼接方式（效率低）**
 
@@ -276,7 +292,7 @@ node.removeChild() 方法从 node节点中删除一个子节点，返回删除�
 
 
 
-## 1.2. DOM的核心总结
+## 2. DOM的核心总结
 
 ![1551164669434](images/1551164669434.png)
 
@@ -286,41 +302,41 @@ node.removeChild() 方法从 node节点中删除一个子节点，返回删除�
 
 关于dom操作，我们主要针对于元素的操作。主要有创建、增、删、改、查、属性操作、事件操作。
 
-### 1.2.1. 创建
+### 2.1. 创建
 
 ![1551164797164](images/1551164797164.png)
 
-### 1.2.2. 增加
+### 2.2. 增加
 
 ![1551164829832](images/1551164829832.png)
 
-### 1.2.3. 删
+### 2.3. 删
 
 ![1551164872533](images/1551164872533.png)
 
-### 1.2.4. 改
+### 2.4. 改
 
 ![1551164907830](images/1551164907830.png)
 
-### 1.2.5. 查
+### 2.5. 查
 
 ![1551164936214](images/1551164936214.png)
 
-### 1.2.6. 属性操作
+### 2.6. 属性操作
 
 ![1551164985383](images/1551164985383.png)
 
-### 1.2.7. 事件操作（重点）
+### 2.7. 事件操作（重点）
 
 
 
-## 1.3. 事件高级
+## 3. 事件高级
 
-### 1.3.1. 注册事件（2种方式）
+### 3.1. 注册事件（2种方式）
 
 ![1551165252019](images/1551165252019.png)
 
-### 1.3.2 事件监听
+### 3.2 事件监听
 
 #### addEventListener()事件监听（IE9以后支持）
 
@@ -372,7 +388,7 @@ eventTarget.addEventListener()方法将指定的监听器注册到 eventTarget�
 
 ![1551166023885](images/1551166023885.png)
 
-### 1.3.3. 删除事件（解绑事件）
+### 3.3. 删除事件（解绑事件）
 
 ![1551166185410](images/1551166185410.png)
 
@@ -407,7 +423,7 @@ eventTarget.addEventListener()方法将指定的监听器注册到 eventTarget�
 
 ![1551166332453](images/1551166332453.png)
 
-### 1.3.4. DOM事件流
+### 3.4. DOM事件流
 
 > ```
 > html中的标签都是相互嵌套的，我们可以将元素想象成一个盒子装一个盒子，document是最外面的大盒子。
@@ -504,7 +520,7 @@ DOM 事件流会经历3个阶段：
     </script>
 ```
 
-### 1.3.5. 事件对象
+### 3.5. 事件对象
 
 #### 什么是事件对象
 
@@ -603,7 +619,7 @@ DOM 事件流会经历3个阶段：
     </script>
 ```
 
-### 1.3.6 阻止默认行为
+### 3.6 阻止默认行为
 
 > html中一些标签有默认行为，例如a标签被单击后，默认会进行页面跳转。
 
@@ -627,7 +643,7 @@ DOM 事件流会经历3个阶段：
     </script>
 ```
 
-### 1.3.7 阻止事件冒泡
+### 3.7 阻止事件冒泡
 
 事件冒泡本身的特性，会带来的坏处，也会带来的好处。
 
@@ -662,7 +678,7 @@ DOM 事件流会经历3个阶段：
 
 ![1551171657513](images/1551171657513.png)
 
-### 1.3.8 事件委托
+### 3.8 事件委托
 
 事件冒泡本身的特性，会带来的坏处，也会带来的好处。
 
@@ -714,11 +730,11 @@ DOM 事件流会经历3个阶段：
     </script>
 ```
 
-## 1.4. 常用鼠标事件
+## 4. 常用鼠标事件
 
 ![1551172699854](images/1551172699854.png)
 
-### 1.4.1 案例：禁止选中文字和禁止右键菜单
+### 4.1 案例：禁止选中文字和禁止右键菜单
 
 ![1551172755484](images/1551172755484.png)
 
@@ -738,11 +754,11 @@ DOM 事件流会经历3个阶段：
 </body>
 ```
 
-### 1.4.2 鼠标事件对象
+### 4.2 鼠标事件对象
 
 ![1551173103741](images/1551173103741.png)
 
-### 1.4.3 获取鼠标在页面的坐标
+### 4.3 获取鼠标在页面的坐标
 
 ```js
     <script>
@@ -766,7 +782,7 @@ DOM 事件流会经历3个阶段：
     </script>
 ```
 
-### 1.4.4 案例：跟随鼠标的天使
+### 4.4 案例：跟随鼠标的天使
 
 ![1551173172613](images/1551173172613.png)
 
