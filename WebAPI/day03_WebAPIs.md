@@ -202,32 +202,32 @@ node.removeChild() 方法从 node节点中删除一个子节点，返回删除�
 
 ![1551164214925](images/1551164214925.png)
 
-```js
-    <script>
-        // 三种创建元素方式区别 
-        // 1. document.write() 创建元素  如果页面文档流加载完毕，再调用这句话会导致页面重绘
-         var btn = document.querySelector('button');
-         btn.onclick = function() {
-             document.write('<div>123</div>');
-         }
+```html
+<script>
+    // 三种创建元素方式区别 
+    // 1. document.write() 创建元素  如果页面文档流加载完毕，再调用这句话会导致页面重绘
+    var btn = document.querySelector('button');
+    btn.onclick = function() {
+        document.write('<div>123</div>');
+    }
 
-        // 2. innerHTML 创建元素
-        var inner = document.querySelector('.inner');
-         for (var i = 0; i <= 100; i++) {
-             inner.innerHTML += '<a href="#">百度</a>'
-         }
-        var arr = [];
-        for (var i = 0; i <= 100; i++) {
-            arr.push('<a href="#">百度</a>');
-        }
-        inner.innerHTML = arr.join('');
-        // 3. document.createElement() 创建元素
-        var create = document.querySelector('.create');
-        for (var i = 0; i <= 100; i++) {
-            var a = document.createElement('a');
-            create.appendChild(a);
-        }
-    </script>
+    // 2. innerHTML 创建元素
+    var inner = document.querySelector('.inner');
+    for (var i = 0; i <= 100; i++) {
+        inner.innerHTML += '<a href="#">百度</a>'
+    }
+    var arr = [];
+    for (var i = 0; i <= 100; i++) {
+        arr.push('<a href="#">百度</a>');
+    }
+    inner.innerHTML = arr.join('');
+    // 3. document.createElement() 创建元素
+    var create = document.querySelector('.create');
+    for (var i = 0; i <= 100; i++) {
+        var a = document.createElement('a');
+        create.appendChild(a);
+    }
+</script>
 ```
 
 
@@ -236,7 +236,7 @@ node.removeChild() 方法从 node节点中删除一个子节点，返回删除�
 
 **innerHTML字符串拼接方式（效率低）**
 
-```js
+```html
 <script>
     function fn() {
         var d1 = +new Date();
@@ -253,7 +253,7 @@ node.removeChild() 方法从 node节点中删除一个子节点，返回删除�
 
 **createElement方式（效率一般）**
 
-```js
+```html
 <script>
     function fn() {
         var d1 = +new Date();
@@ -274,7 +274,7 @@ node.removeChild() 方法从 node节点中删除一个子节点，返回删除�
 
 **innerHTML数组方式（效率高）**
 
-```js
+```html
 <script>
     function fn() {
         var d1 = +new Date();
@@ -328,7 +328,16 @@ node.removeChild() 方法从 node节点中删除一个子节点，返回删除�
 
 ### 2.7. 事件操作（重点）
 
-
+| 鼠标事件    | 触发条件         |
+| ----------- | ---------------- |
+| onclick     | 鼠标点击左键触发 |
+| onmouseover | 鼠标经过触发     |
+| onmouseout  | 鼠标离开触发     |
+| onfocus     | 获得鼠标焦点触发 |
+| onblur      | 失去鼠标焦点触发 |
+| onmousemove | 鼠标移动触发     |
+| onmouseup   | 鼠标弹起触发     |
+| onmousedown | 鼠标按下触发     |
 
 ## 3. 事件高级
 
@@ -712,7 +721,7 @@ DOM 事件流会经历3个阶段：
 
 - 动态新创建的子元素，也拥有事件。
 
-```js
+```html
     <ul>
         <li>知否知否，点我应有弹框在手！</li>
         <li>知否知否，点我应有弹框在手！</li>
