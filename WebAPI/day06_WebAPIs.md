@@ -1,6 +1,4 @@
-
-
-#  **day06 - Web APIs**
+##  **day06 - Web APIs**
 
 > **学习目标:**
 >
