@@ -353,7 +353,7 @@ node.removeChild() 方法从 node节点中删除一个子节点，返回删除�
 
 eventTarget.addEventListener()方法将指定的监听器注册到 eventTarget（目标对象）上，当该对象触发指定的事件时，就会执行事件处理函数。
 
-![1551165604792](images/1551165604792.png)
+![1551165604792](D:/Program Files/Typora/1551165604792.png)
 
 #### attacheEvent()事件监听（IE678支持）
 
@@ -363,7 +363,7 @@ eventTarget.addEventListener()方法将指定的监听器注册到 eventTarget�
 
 ![1551165843912](images/1551165843912.png)
 
-```js
+```html
 <button>传统注册事件</button>
 <button>方法监听注册事件</button>
 <button>ie9 attachEvent</button>
@@ -374,18 +374,18 @@ eventTarget.addEventListener()方法将指定的监听器注册到 eventTarget�
         alert('hi');
     }
     btns[0].onclick = function() {
-            alert('hao a u');
-        }
-   // 2. 事件侦听注册事件 addEventListener 
-   // (1) 里面的事件类型是字符串 必定加引号 而且不带on
-   // (2) 同一个元素 同一个事件可以添加多个侦听器（事件处理程序）
+        alert('hao a u');
+    }
+    // 2. 事件侦听注册事件 addEventListener  (推荐)
+    // (1) 里面的事件类型是字符串 必定加引号 而且不带on
+    // (2) 同一个元素 同一个事件可以添加多个侦听器（事件处理程序）
     btns[1].addEventListener('click', function() {
         alert(22);
     })
     btns[1].addEventListener('click', function() {
-            alert(33);
+        alert(33);
     })
-    // 3. attachEvent ie9以前的版本支持
+    // 3. attachEvent ie9以前的版本支持   (了解)
     btns[2].attachEvent('onclick', function() {
         alert(11);
     })
@@ -401,31 +401,31 @@ eventTarget.addEventListener()方法将指定的监听器注册到 eventTarget�
 
 ![1551166185410](images/1551166185410.png)
 
-```js
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-    <script>
-        var divs = document.querySelectorAll('div');
-        divs[0].onclick = function() {
-            alert(11);
-            // 1. 传统方式删除事件
-            divs[0].onclick = null;
-        }
-        // 2. removeEventListener 删除事件
-        divs[1].addEventListener('click', fn) // 里面的fn 不需要调用加小括号
-        function fn() {
-            alert(22);
-            divs[1].removeEventListener('click', fn);
-        }
-        // 3. detachEvent
-        divs[2].attachEvent('onclick', fn1);
+```html
+<div>1</div>
+<div>2</div>
+<div>3</div>
+<script>
+    var divs = document.querySelectorAll('div');
+    divs[0].onclick = function() {
+        alert(11);
+        // 1. 传统方式删除事件
+        divs[0].onclick = null;
+    }
+    // 2. removeEventListener 删除事件   
+    divs[1].addEventListener('click', fn) // 里面的fn 不需要调用加小括号
+    function fn() {
+        alert(22);
+        divs[1].removeEventListener('click', fn);
+    }
+    // 3. detachEvent
+    divs[2].attachEvent('onclick', fn1);
 
-        function fn1() {
-            alert(33);
-            divs[2].detachEvent('onclick', fn1);
-        }
-    </script>
+    function fn1() {
+        alert(33);
+        divs[2].detachEvent('onclick', fn1);
+    }
+</script>
 ```
 
 **删除事件兼容性解决方案 **
@@ -478,7 +478,7 @@ DOM 事件流会经历3个阶段：
 
 **事件冒泡**
 
-```js
+```html
     <div class="father">
         <div class="son">son盒子</div>
     </div>
@@ -505,7 +505,7 @@ DOM 事件流会经历3个阶段：
 
 **事件捕获**
 
-```js
+```html
     <div class="father">
         <div class="son">son盒子</div>
     </div>
@@ -566,36 +566,47 @@ DOM 事件流会经历3个阶段：
 只要“||”前面为true, 不管“||”后面是true 还是 false，都返回 “||” 前面的值。
 ```
 
-```js
-    <div>123</div>
-    <script>
-        var div = document.querySelector('div');
-        div.onclick = function(e) {
-                // 事件对象
-                e = e || window.event;
-                console.log(e);
-        }
-    </script>
+```html
+<div>123</div>
+<script>
+    var div = document.querySelector('div');
+    div.onclick = function(e) {
+        // 事件对象
+        e = e || window.event;
+        console.log(e);
+    }
+</script>
 ```
 
 #### 事件对象的属性和方法
 
-![1551169931778](images/1551169931778.png)
+| 事件对象属性方法    | 说明                                                         |
+| ------------------- | ------------------------------------------------------------ |
+| e.target            | 返回触发事件的对象        标准           (重点)              |
+| e.srcElement        | 返回触发事件的对象        非标准  ie6-8使用                  |
+| e.type              | 返回事件的类型                比如  click  mouseover   不带on   (重点) |
+| e.preventDefault()  | 该方法阻止默认事件   (默认行为)   标准     比如不让链接跳转           (重点) |
+| e.returnValue       | 该属性阻止默认事件（默认行为)   非标准     ie6-8使用   比如不让链接跳转 |
+| e.stopPropagation() | 阻止冒泡  标准        (重点)                                 |
+| e.cancelBubble      | 该属性阻止冒泡                非标准   ie6-8使用             |
+
+
 
 #### e.target 和 this 的区别
 
 -  this 是事件绑定的元素（绑定这个事件处理函数的元素） 。
-
 -  e.target 是事件触发的元素。
 
-> ```
-> 常情况下terget 和 this是一致的，
-> 但有一种情况不同，那就是在事件冒泡时（父子元素有相同事件，单击子元素，父元素的事件处理函数也会被触发执行），
-> 	这时候this指向的是父元素，因为它是绑定事件的元素对象，
-> 	而target指向的是子元素，因为他是触发事件的那个具体元素对象。
-> ```
+```text
+常情况下terget 和 this是一致的，
+但有一种情况不同，那就是在事件冒泡时（父子元素有相同事件，单击子元素，父元素的事件处理函数也会被触发执行），
+ 	这时候this指向的是父元素，因为它是绑定事件的元素对象，
+	而target指向的是子元素，因为他是触发事件的那个具体元素对象。
+```
 
-```js
+**区别 ： e.target 点击了那个元素，就返回那个元素                               this 那个元素绑定了这个点击事件，那么就返回谁**
+
+```html
     <div>123</div>
     <script>
         var div = document.querySelector('div');
@@ -610,46 +621,64 @@ DOM 事件流会经历3个阶段：
 
 事件冒泡下的e.target和this
 
-```js
-    <ul>
-        <li>abc</li>
-        <li>abc</li>
-        <li>abc</li>
-    </ul>
-    <script>
-        var ul = document.querySelector('ul');
-        ul.addEventListener('click', function(e) {
-              // 我们给ul 绑定了事件  那么this 就指向ul  
-              console.log(this); // ul
-
-              // e.target 触发了事件的对象 我们点击的是li e.target 指向的就是li
-              console.log(e.target); // li
-        });
-    </script>
+```html
+<ul>
+    <li>abc</li>
+    <li>abc</li>
+    <li>abc</li>
+</ul>
+<script>
+    var ul = document.querySelector('ul');
+    ul.addEventListener('click', function(e) {
+        // 我们给ul 绑定了事件  那么this 就指向ul  
+        console.log(this); // ul
+        // e.target 触发了事件的对象 我们点击的是li e.target 指向的就是li
+        console.log(e.target); // li
+    });
+</script>
 ```
+
+#### e.type返回事件类型
+
+```html
+<script> 
+    // 1. 返回事件类型
+    var div = document.querySelector('div');
+    div.addEventListener('click', fn);
+    div.addEventListener('mouseover', fn);
+    div.addEventListener('mouseout', fn);
+
+    function fn(e) {
+        console.log(e.type);
+
+    }
+</script>
+```
+
+
 
 ### 3.6 阻止默认行为
 
 > html中一些标签有默认行为，例如a标签被单击后，默认会进行页面跳转。
 
-```js
-    <a href="http://www.baidu.com">百度</a>
-    <script>
-        // 2. 阻止默认行为 让链接不跳转 
-        var a = document.querySelector('a');
-        a.addEventListener('click', function(e) {
-             e.preventDefault(); //  dom 标准写法
-        });
-        // 3. 传统的注册方式
-        a.onclick = function(e) {
-            // 普通浏览器 e.preventDefault();  方法
-            e.preventDefault();
-            // 低版本浏览器 ie678  returnValue  属性
-            e.returnValue = false;
-            // 我们可以利用return false 也能阻止默认行为 没有兼容性问题
-            return false;
-        }
-    </script>
+```html
+<a href="http://www.baidu.com">百度</a>
+<script>
+    // 2. 阻止默认行为 让链接不跳转 
+    var a = document.querySelector('a');
+    a.addEventListener('click', function(e) {
+        e.preventDefault(); //  dom 标准写法  (重点)
+    });
+    // 3. 传统的注册方式
+    a.onclick = function(e) {
+        // 普通浏览器 e.preventDefault();  方法
+        e.preventDefault();
+        // 低版本浏览器 ie678  returnValue  属性
+        e.returnValue = false;
+        // 我们可以利用return false 也能阻止默认行为 没有兼容性问题
+        return false;
+    }
+</script>
 ```
 
 ### 3.7 阻止事件冒泡
@@ -658,7 +687,7 @@ DOM 事件流会经历3个阶段：
 
 ![1551171467194](images/1551171467194.png)
 
-```js
+```html
     <div class="father">
         <div class="son">son儿子</div>
     </div>
@@ -713,7 +742,9 @@ DOM 事件流会经历3个阶段：
 
 #### 事件委托的原理
 
-​	给父元素注册事件，利用事件冒泡，当子元素的事件触发，会冒泡到父元素，然后去控制相应的子元素。
+​	**给父元素注册事件，利用事件冒泡，当子元素的事件触发，会冒泡到父元素，然后去控制相应的子元素。**
+
+​	不是每个子节点单独设置事件监听器，而是事件监听器设置在其父节点上，然后利用冒泡原理影响设置每个子节点。
 
 #### 事件委托的作用
 
@@ -741,13 +772,25 @@ DOM 事件流会经历3个阶段：
 
 ## 4. 常用鼠标事件
 
-![1551172699854](images/1551172699854.png)
+| 鼠标事件    | 触发条件         |
+| ----------- | ---------------- |
+| onclick     | 鼠标点击左键触发 |
+| onmouseover | 鼠标经过触发     |
+| onmouseout  | 鼠标离开触发     |
+| onfocus     | 获得鼠标焦点触发 |
+| onblur      | 失去鼠标焦点触发 |
+| onmousemove | 鼠标移动触发     |
+| onmouseup   | 鼠标弹起触发     |
+| onmousedown | 鼠标按下触发     |
+| contextmenu | 禁止鼠标右键菜单 |
+| selectstart | 禁止鼠标选中     |
+| mousemve    | 鼠标不断移动     |
 
 ### 4.1 案例：禁止选中文字和禁止右键菜单
 
 ![1551172755484](images/1551172755484.png)
 
-```js
+```html
 <body>
     我是一段不愿意分享的文字
     <script>
@@ -765,11 +808,20 @@ DOM 事件流会经历3个阶段：
 
 ### 4.2 鼠标事件对象
 
-![1551173103741](images/1551173103741.png)
+![image-20201201012319170](images/image-20201201012319170.png)
+
+| 鼠标事件对象 | 说明                                                     |
+| ------------ | -------------------------------------------------------- |
+| e.clientX    | 返回鼠标相对于浏览器窗口可视区的X坐标                    |
+| e.clientY    | 返回鼠标相对于浏览器窗口可视区的Y坐标                    |
+| e.pageX      | 返回鼠标相对于文档页面的 X 坐标 IE9+支持          (重点) |
+| e.pageY      | 返回鼠标相对于文档页面的 Y 坐标 IE9+支持          (重点) |
+| e.screenX    | 返回鼠标相对于电脑屏幕的 X 坐标                          |
+| e.screenY    | 返回鼠标相对于电脑屏幕的 Y 坐标                          |
 
 ### 4.3 获取鼠标在页面的坐标
 
-```js
+```html
     <script>
         // 鼠标事件对象 MouseEvent
         document.addEventListener('click', function(e) {
@@ -797,7 +849,7 @@ DOM 事件流会经历3个阶段：
 
 ![1551173186812](images/1551173186812.png)
 
-```js
+```html
     <img src="images/angel.gif" alt="">
     <script>
         var pic = document.querySelector('img');

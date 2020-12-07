@@ -24,28 +24,31 @@
 
 ### 1.1.1 键盘事件
 
-![1551318122855](images/1551318122855.png)
+| 键盘事件   | 触发条件                                         |
+| ---------- | ------------------------------------------------ |
+| onkeyup    | 某个键盘按键被松开时触发                         |
+| onkeydown  | 某个键盘按键被按下时触发                         |
+| onkeypress | 摸个键盘按键被按下时触发        (不能识别功能键) |
 
 ![1551318160371](images/1551318160371.png)
 
-```js
-    <script>
-        // 常用的键盘事件
-        //1. keyup 按键弹起的时候触发 
-        document.addEventListener('keyup', function() {
-            console.log('我弹起了');
-        })
-
-        //3. keypress 按键按下的时候触发  不能识别功能键 比如 ctrl shift 左右箭头啊
-        document.addEventListener('keypress', function() {
-                console.log('我按下了press');
-        })
-        //2. keydown 按键按下的时候触发  能识别功能键 比如 ctrl shift 左右箭头啊
-        document.addEventListener('keydown', function() {
-                console.log('我按下了down');
-        })
-        // 4. 三个事件的执行顺序  keydown -- keypress -- keyup
-    </script>
+```html
+<script>
+    // 常用的键盘事件
+    //1. keyup 按键弹起的时候触发 
+    document.addEventListener('keyup', function() {
+        console.log('我弹起了');
+    })
+    //2. keydown 按键按下的时候触发  能识别功能键 比如 ctrl shift 左右箭头啊
+    document.addEventListener('keydown', function() {
+        console.log('我按下了down');
+    })
+    //3. keypress 按键按下的时候触发  不能识别功能键 比如 ctrl shift 左右箭头啊
+    document.addEventListener('keypress', function() {
+        console.log('我按下了press');
+    })
+    // 4. 三个事件的执行顺序  keydown -- keypress -- keyup
+</script>
 ```
 
 ### 1.1.2 键盘事件对象
@@ -56,7 +59,7 @@
 
 **使用keyCode属性判断用户按下哪个键**
 
-```js
+```html
     <script>
         // 键盘事件对象中的keyCode属性可以得到相应键的ASCII码值
         document.addEventListener('keyup', function(e) {
@@ -83,7 +86,7 @@
 
 > 注意：触发获得焦点事件，可以使用 元素对象.focus()
 
-```js
+```html
     <input type="text">
     <script>
         // 获取输入框
@@ -107,7 +110,7 @@
 
 ![1551318909264](images/1551318909264.png)
 
-```js
+```html
     <div class="search">
         <div class="con">123</div>
         <input type="text" placeholder="请输入您的快递单号" class="jd">
