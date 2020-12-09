@@ -20,9 +20,9 @@
 >
 > 能够使用history提供的方法实现页面刷新
 
-## 1.1. 常用的键盘事件
+## 1. 常用的键盘事件
 
-### 1.1.1 键盘事件
+### 1.1 键盘事件
 
 | 键盘事件   | 触发条件                                         |
 | ---------- | ------------------------------------------------ |
@@ -51,7 +51,7 @@
 </script>
 ```
 
-### 1.1.2 键盘事件对象
+### 1.2 键盘事件对象
 
 ![1551318355505](images/1551318355505.png)
 
@@ -78,7 +78,7 @@
     </script>
 ```
 
-### 1.1.3 案例：模拟京东按键输入内容
+### 1.3 案例：模拟京东按键输入内容
 
 当我们按下 s 键， 光标就定位到搜索框（文本框获得焦点）。
 
@@ -102,7 +102,7 @@
     </script>
 ```
 
-### 1.1.4 案例：模拟京东快递单号查询
+### 1.4 案例：模拟京东快递单号查询
 
 要求：当我们在文本框中输入内容时，文本框上面自动显示大字号的内容。
 
@@ -146,9 +146,9 @@
     </script>
 ```
 
-## 1.2. BOM
+## 2. BOM
 
-### 1.2.1. 什么是BOM
+### 2.1. 什么是BOM
 
 ​	BOM（Browser Object Model）即浏览器对象模型，它提供了独立于内容而与浏览器窗口进行交互的对象，其核心对象是 window。
 
@@ -158,17 +158,17 @@
 
 ![1551319264407](images/1551319264407.png)
 
-### 1.2.2. BOM的构成
+### 2.2. BOM的构成
 
 BOM 比 DOM 更大，它包含 DOM。
 
 ![1551319344183](images/1551319344183.png)
 
-### 1.2.3. 顶级对象window
+### 2.3. 顶级对象window
 
 ![1551319372909](images/1551319372909.png)
 
-### 1.2.4. window对象的常见事件
+### 2.4. window对象的常见事件
 
 #### 页面（窗口）加载事件（2种）
 
@@ -190,21 +190,23 @@ window.onload 是窗口 (页面）加载事件，**当文档内容完全加载�
 
 ​	如果页面的图片很多的话, 从用户访问到onload触发可能需要较长的时间, 交互效果就不能实现，必然影响用户的体验，此时用 DOMContentLoaded 事件比较合适。
 
-```js
-    <script>
-        window.addEventListener('load', function() {
-            var btn = document.querySelector('button');
-            btn.addEventListener('click', function() {
-                alert('点击我');
-            })
+```html
+<script>
+    window.addEventListener('load', function() {
+        var btn = document.querySelector('button');
+        btn.addEventListener('click', function() {
+            alert('点击我');
         })
-        window.addEventListener('load', function() {
-            alert(22);
-        })
-        document.addEventListener('DOMContentLoaded', function() {
-            alert(33);
-        })
-    </script>
+    })
+    window.addEventListener('load', function() {
+        alert(22);
+    })
+    document.addEventListener('DOMContentLoaded', function() {
+        alert(33);
+    })
+    // load 等页面内容全部加载完毕，包含页面dom元素 图片 flash  css 等等
+    // DOMContentLoaded 是DOM 加载完毕，不包含图片 falsh css 等就可以执行 加载速度比 load更快一些
+</script>
 ```
 
 #### 调整窗口大小事件
@@ -219,7 +221,7 @@ window.onload 是窗口 (页面）加载事件，**当文档内容完全加载�
 
 2. 我们经常利用这个事件完成响应式布局。 window.innerWidth 当前屏幕的宽度
 
-```js
+```html
     <script>
         // 注册页面加载事件
         window.addEventListener('load', function() {
@@ -241,7 +243,7 @@ window.onload 是窗口 (页面）加载事件，**当文档内容完全加载�
 
 
 
-### 1.2.5. 定时器（两种）
+### 2.5. 定时器（两种）
 
 window 对象给我们提供了 2 个非常好用的方法-定时器。
 
@@ -271,7 +273,7 @@ window 对象给我们提供了 2 个非常好用的方法-定时器。
 
 
 
-```js
+```html
     <script>
         // 回调函数是一个匿名函数
          setTimeout(function() {
@@ -295,7 +297,7 @@ window 对象给我们提供了 2 个非常好用的方法-定时器。
 
 ![1551320959756](images/1551320959756.png)
 
-```js
+```html
 <body>
     <img src="images/ad.jpg" alt="" class="ad">
     <script>
@@ -315,7 +317,7 @@ window 对象给我们提供了 2 个非常好用的方法-定时器。
 
 ![1551321064154](images/1551321064154.png)
 
-```js
+```html
     <button>点击停止定时器</button>
     <script>
         var btn = document.querySelector('button');
@@ -339,7 +341,7 @@ window 对象给我们提供了 2 个非常好用的方法-定时器。
 
 ![1551321162158](images/1551321162158.png)
 
-```js
+```html
     <script>
         // 1. setInterval 
         setInterval(function() {
@@ -354,7 +356,7 @@ window 对象给我们提供了 2 个非常好用的方法-定时器。
 
 ![1551321322188](images/1551321322188.png)
 
-```js
+```html
     <div>
         <span class="hour">1</span>
         <span class="minute">2</span>
@@ -392,6 +394,27 @@ window 对象给我们提供了 2 个非常好用的方法-定时器。
 
 ![1551321444559](images/1551321444559.png)
 
+```html
+    <button class="begin">开启定时器</button>
+    <button class="stop">停止定时器</button>
+    <script>
+        var begin = document.querySelector('.begin');
+        var stop = document.querySelector('.stop');
+        var timer = null; // 全局变量  null是一个空对象
+        begin.addEventListener('click', function() {
+            timer = setInterval(function() {
+                console.log('ni hao ma');
+
+            }, 1000);
+        })
+        stop.addEventListener('click', function() {
+            clearInterval(timer);
+        })
+    </script>
+```
+
+
+
 #### 案例：发送短信倒计时
 
 ​	点击按钮后，该按钮60秒之内不能再次点击，防止重复发送短信。
@@ -400,7 +423,7 @@ window 对象给我们提供了 2 个非常好用的方法-定时器。
 
 ![1551321564247](images/1551321564247.png)
 
-```js
+```html
     手机号码： <input type="number"> <button>发送</button>
     <script>
         var btn = document.querySelector('button');
@@ -429,7 +452,7 @@ window 对象给我们提供了 2 个非常好用的方法-定时器。
 
 
 
-### 1.2.6. this指向问题
+### 2.6. this指向问题
 
 ​	this的指向在函数定义的时候是确定不了的，只有函数执行的时候才能确定this到底指向谁，一般情况下this的最终指向的是那个调用它的对象。
 
@@ -440,7 +463,7 @@ window 对象给我们提供了 2 个非常好用的方法-定时器。
 2. 方法调用中谁调用this指向谁
 3. 构造函数中this指向构造函数的实例
 
-```js
+```html
     <button>点击</button>
     <script>
         // this 指向问题 一般情况下this的最终指向的是那个调用它的对象
@@ -474,7 +497,7 @@ window 对象给我们提供了 2 个非常好用的方法-定时器。
 
 
 
-### 1.2.7. location对象
+### 2.7. location对象
 
 #### 什么是 location 对象
 
@@ -498,7 +521,7 @@ window 对象给我们提供了 2 个非常好用的方法-定时器。
 
 ![1551322517605](images/1551322517605.png)
 
-```js
+```html
     <button>点击</button>
     <div></div>
     <script>
@@ -560,7 +583,7 @@ window 对象给我们提供了 2 个非常好用的方法-定时器。
     </script>
 ```
 
-### 1.2.8. navigator对象
+### 2.8. navigator对象
 
 ​	navigator 对象包含有关浏览器的信息，它有很多属性，我们最常用的是 userAgent，该属性可以返回由客户机发送服务器的 user-agent 头部的值。
 
@@ -574,7 +597,7 @@ if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|Mobil
  }
 ```
 
-### 1.2.9 history对象
+### 2.9 history对象
 
 ​	window对象给我们提供了一个 history对象，与浏览器历史记录进行交互。该对象包含用户（在浏览器窗口中）访问过的URL。
 
@@ -584,7 +607,7 @@ history对象一般在实际开发中比较少用，但是会在一些 OA 办公
 
 ![1551322959148](images/1551322959148.png)
 
-## 1.3. JS执行机制
+## 3. JS执行机制
 
 以下代码执行的结果是什么？
 
@@ -612,7 +635,7 @@ history对象一般在实际开发中比较少用，但是会在一些 OA 办公
 
 
 
-### 1.3.1 JS 是单线程
+### 3.1 JS 是单线程
 
 ![1551415019322](images/1551415019322.png)
 
@@ -621,7 +644,7 @@ history对象一般在实际开发中比较少用，但是会在一些 OA 办公
 	这样所导致的问题是： 如果 JS 执行的时间过长，这样就会造成页面的渲染不连贯，导致页面渲染加载阻塞的感觉。
 ```
 
-### 1.3.2 同步任务和异步任务
+### 3.2 同步任务和异步任务
 
 ​	单线程导致的问题就是后面的任务等待前面任务完成，如果前面任务很耗时（比如读取网络数据），后面任务不得不一直等待！！
 
@@ -648,7 +671,7 @@ history对象一般在实际开发中比较少用，但是会在一些 OA 办公
 
 ![1551434972778](images/1551434972778.png)
 
-### 1.3.3 JS执行机制（事件循环）
+### 3.3 JS执行机制（事件循环）
 
 ![1551435335464](images/1551435335464.png)
 
@@ -656,7 +679,7 @@ history对象一般在实际开发中比较少用，但是会在一些 OA 办公
 
 ![1551435449634](images/1551435449634.png)
 
-### 1.3.4 代码思考题
+### 3.4 代码思考题
 
 ```js
  console.log(1);
